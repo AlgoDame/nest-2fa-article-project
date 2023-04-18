@@ -3,10 +3,7 @@ import { constants } from './constants';
 
 const saltOrRounds = constants.saltRounds;
 
-export const hashPassword = async (
-  salt: number,
-  password: string,
-): Promise<string> => {
+export const hashPassword = async (password: string): Promise<string> => {
   const hash = await bcrypt.hash(password, saltOrRounds);
   return hash;
 };
