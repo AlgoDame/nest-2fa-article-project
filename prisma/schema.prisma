@@ -11,13 +11,30 @@ datasource db {
 }
 
 model User {
-  id        String  @id @default(uuid())
-  email     String  @unique
-  password String
+  id        String   @id @default(uuid())
+  email     String   @unique
+  password  String
   firstName String
   lastName  String
-  twoFA     Boolean @default(false)
+  twoFA     Boolean  @default(false)
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+  Otp       Otp[]
 }
 
+model Otp {
+  id     String @id @default(uuid())
+  owner  User   @relation(fields: [userId], references: [id])
+  userId String
+  code String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  expiresAt  DateTime @db.Timestamp(5)
+  useCase UseCase
+}
+
+
+enum UseCase {
+  LOGIN
+  D2FA
+}
