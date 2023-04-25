@@ -50,4 +50,12 @@ export class AccountController {
   validatePhoneVerification(@Body() _body, @Req() request: Request) {
     return this.accountService.validatePhoneVerification(request);
   }
+
+  @UsePipes(new JoiValidationPipe(tokenSchema))
+  @UseGuards(AuthGuard)
+  @HttpCode(200)
+  @Post('disable-twofa/verify')
+  disable2FAVerification(@Body() _body, @Req() request: Request) {
+    return this.accountService.disable2FAVerification(request);
+  }
 }

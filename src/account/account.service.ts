@@ -121,4 +121,28 @@ export class AccountService {
     await this.prisma.otp.delete({ where: { id: otpRecord.id } });
     return { success: true };
   }
+
+  async disable2FAVerification(req: Request) {
+    const {
+      body: { token },
+    } = req;
+    const userDetails = req['user'];
+    const otpRecord = await this.prisma.otp.findFirst({
+      where: { code: token, useCase: 'D2FA', userId: userDetails.sub },
+    });
+    if (!otpRecord) {
+      throw new HttpException('Invalid OTP', HttpStatus.NOT_FOUND);
+    }
+    const isExpired = isTokenExpired(otpRecord.expiresAt);
+    if (isExpired) {
+      throw new HttpException('Expired token', HttpStatus.NOT_FOUND);
+    }
+    await this.prisma.user.update({
+      where: { id: userDetails.sub },
+      data: { twoFA: false },
+    });
+
+    await this.prisma.otp.delete({ where: { id: otpRecord.id } });
+    return { success: true };
+  }
 }
