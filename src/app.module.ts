@@ -1,11 +1,11 @@
 import { Module, NestModule, MiddlewareConsumer } from '@nestjs/common';
-import { SignupModule } from './signup/signup.module';
+import { AccountModule } from './account/account.module';
 import { PrismaModule } from './prisma/prisma.module';
-import { LoggerMiddleware } from './utils/logger';
+import { LoggerMiddleware } from './common/utils/logger';
 import { AuthModule } from './auth/auth.module';
 
 @Module({
-  imports: [SignupModule, PrismaModule, AuthModule],
+  imports: [AccountModule, PrismaModule, AuthModule],
   controllers: [],
   providers: [],
 })

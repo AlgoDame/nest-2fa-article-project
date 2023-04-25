@@ -13,6 +13,7 @@ datasource db {
 model User {
   id        String   @id @default(uuid())
   email     String   @unique
+  phone     String   @unique
   password  String
   firstName String
   lastName  String
@@ -20,21 +21,22 @@ model User {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
   Otp       Otp[]
+  isPhoneVerified Boolean @default(false)
 }
 
 model Otp {
-  id     String @id @default(uuid())
-  owner  User   @relation(fields: [userId], references: [id])
-  userId String
-  code String
+  id        String   @id @default(uuid())
+  owner     User     @relation(fields: [userId], references: [id])
+  userId    String
+  code      String
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
-  expiresAt  DateTime @db.Timestamp(5)
-  useCase UseCase
+  expiresAt DateTime @db.Timestamp(5)
+  useCase   UseCase
 }
-
 
 enum UseCase {
   LOGIN
   D2FA
+  PHV
 }
