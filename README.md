@@ -1,6 +1,6 @@
 # NestJS Two-Factor Authentication Implementation
 
-A demo project for my dev.to article. This project demonstrates how to implement two-factor authentication (2FA) in a NestJS project. The implementation covers sign up, login, authentication, using pipes for request validation, using guards to protect routes, and enabling/disabling 2FA.
+A demo project for my [dev.to article](https://dev.to/algodame/implementing-sms-enabled-two-factor-authentication-using-nestjs-twilio-and-prisma-52p). This project demonstrates how to implement two-factor authentication (2FA) in a NestJS project. The implementation covers sign up, login, authentication, using pipes for request validation, using guards to protect routes, and enabling/disabling 2FA.
 
 ## Getting Started
 
