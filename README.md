@@ -12,6 +12,7 @@ To run this project, you will need to have Node.js and npm installed on your mac
 
 - Node.js: https://nodejs.org
 - npm: https://www.npmjs.com/get-npm
+- Postgres: https://www.postgresql.org
 
 ### Installing
 
